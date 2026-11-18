@@ -191,6 +191,9 @@
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
   .chip { border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: 15px; cursor: pointer; font-family: var(--body); }
   .chip[aria-pressed="true"] { background: var(--court); border-color: var(--court); color: var(--court-ink); }
+  .catalog { display: grid; gap: 40px; }
+  .group-title { display: flex; align-items: center; gap: 12px; font-size: clamp(30px, 4vw, 44px); font-weight: 800; font-style: italic; text-transform: uppercase; margin-bottom: 16px; }
+  .group-title svg { width: 34px; height: 34px; color: var(--court); flex: none; }
   .products { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
   .product { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
   .product .img { aspect-ratio: 1 / 1; max-width: 100%; display: grid; place-items: center; background: linear-gradient(160deg, var(--court) 0%, var(--court-deep) 100%); color: var(--court-ink); position: relative; }
@@ -510,7 +513,7 @@
           <a class="btn btn-ball js-wa" data-msg="Olá! Quero conhecer os produtos Compass da Speed Padel." href="#contatos">Ver modelos</a>
         </div>
         <div class="chips" role="group" aria-label="Filtrar por categoria" id="chips"></div>
-        <div class="products" id="products"></div>
+        <div class="catalog" id="products"></div>
         <p class="note">Preços e modelos são confirmados pelo WhatsApp. Bebidas são para consumo na arena.</p>
       </div>
     </div>
@@ -687,17 +690,26 @@
 
   const chips = document.getElementById("chips");
   const grid = document.getElementById("products");
-  let current = "todos";
-  try { current = localStorage.getItem("sp-cat") || "todos"; } catch (e) {}
-  if (current !== "todos" && !CATEGORIES.some((c) => c.id === current)) current = "todos";
+  let current = "todos"; /* sempre abre mostrando todas as categorias */
 
   function renderChips() {
     const all = [{ id: "todos", name: "Todos" }, ...CATEGORIES];
     chips.innerHTML = all.map((c) => `<button type="button" class="chip" data-cat="${c.id}" aria-pressed="${c.id === current}">${c.name}</button>`).join("");
   }
   function renderProducts() {
-    const list = PRODUCTS.filter((p) => current === "todos" || p.cat === current);
-    grid.innerHTML = list.map((p) => {
+    const cats = CATEGORIES.filter((c) => current === "todos" || c.id === current);
+    grid.innerHTML = cats.map((c) => {
+      const items = PRODUCTS.filter((p) => p.cat === c.id);
+      if (!items.length) return "";
+      return `<section class="group" aria-label="${esc(c.name)}">
+        <h3 class="group-title"><svg aria-hidden="true"><use href="#${c.icon}"/></svg>${esc(c.name)}</h3>
+        <div class="products">${items.map(card).join("")}</div>
+      </section>`;
+    }).join("");
+    wireLinks(grid);
+  }
+  function card(p) {
+    {
       const cat = CATEGORIES.find((c) => c.id === p.cat);
       const price = typeof p.price === "number" ? brl.format(p.price) : "Consulte o preço";
       const msg = `Olá! Tenho interesse em: ${p.name} (${cat.name}). Pode me passar preço e disponibilidade?`;
@@ -711,14 +723,12 @@
           <a class="btn btn-wa js-wa" data-msg="${esc(msg)}" href="#contatos"><svg width="18" height="18"><use href="#i-wa"/></svg>Pedir no WhatsApp</a>
         </div>
       </article>`;
-    }).join("");
-    wireLinks(grid);
+    }
   }
   chips.addEventListener("click", (e) => {
     const b = e.target.closest("[data-cat]");
     if (!b) return;
     current = b.dataset.cat;
-    try { localStorage.setItem("sp-cat", current); } catch (e2) {}
     renderChips(); renderProducts();
   });
   renderChips(); renderProducts();
