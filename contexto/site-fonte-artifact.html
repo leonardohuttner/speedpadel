@@ -26,6 +26,14 @@
     --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
     --radius: 16px;
     --max: 1160px;
+    /* faixas escuras no estilo da apresentação (iguais nos dois temas) */
+    --deep: #0E4677;
+    --deep-card: #155485;
+    --deep-line: #2470AD;
+    --onblue: #D3E4F2;
+    --shade: rgba(8, 36, 64, 0.94);
+    --shade-mid: rgba(8, 36, 64, 0.80);
+    --shade-clear: rgba(8, 36, 64, 0.15);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -53,7 +61,7 @@
   header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--court-deep); color: var(--court-ink); }
   header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; padding-block: 10px; }
   .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .logo img { width: 44px; height: 44px; border-radius: 50%; flex: none; border: 2px solid rgba(255,255,255,0.85); }
+  .logo img { width: 44px; height: 44px; border-radius: 50%; flex: none; border: 2px solid var(--ball); }
   .logo b { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; display: block; }
   .logo small { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; margin-top: 3px; }
   nav.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
@@ -74,31 +82,44 @@
   main { padding-bottom: 96px; } /* reserva espaço para o botão flutuante */
   .band { padding-block: 64px; }
   .band.tight { padding-top: 0; }
-  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--turf); margin-bottom: 10px; }
-  .h2 { font-size: clamp(34px, 5vw, 50px); font-weight: 800; text-transform: uppercase; font-style: italic; }
+  .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--turf); margin-bottom: 12px; }
+  .h2 { font-size: clamp(40px, 6.2vw, 74px); line-height: 0.95; font-weight: 800; text-transform: uppercase; font-style: italic; }
+  .hl { color: var(--ball); }
+
+  /* faixa escura (como os slides azuis) */
+  .band.dark { background: var(--deep); color: #FFFFFF; }
+  .band.dark .eyebrow { color: var(--ball); }
+  .band.dark .lead { color: var(--onblue); }
+  .band.dark .card { background: var(--deep-card); border-color: var(--deep-line); }
+  .band.dark .card p { color: var(--onblue); }
+  .band.dark .ico { background: var(--ball); color: var(--ball-ink); }
   .lead { color: var(--muted); font-size: 18px; max-width: 62ch; margin-top: 12px; }
   .head { margin-bottom: 30px; }
 
   /* hero */
-  .hero { background: linear-gradient(160deg, var(--court) 0%, var(--court-deep) 100%); color: var(--court-ink); }
-  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 44px; align-items: center; padding-block: 52px 60px; }
-  .hero .eyebrow { color: var(--ball); }
-  .hero h1 { font-size: clamp(48px, 7vw, 84px); font-weight: 800; font-style: italic; text-transform: uppercase; }
+  /* hero: foto da quadra em tela cheia com degradê azul, como a capa da apresentação */
+  .hero { position: relative; isolation: isolate; overflow: hidden; background: var(--deep); color: #FFFFFF; }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; z-index: -2; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--shade) 0%, var(--shade-mid) 45%, var(--shade-clear) 100%); }
+  .hero .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; padding-block: clamp(56px, 9vw, 120px); }
+  .hero-logo { width: 88px; height: 88px; border-radius: 50%; border: 4px solid var(--ball); flex: none; }
+  .hero .eyebrow { color: var(--ball); margin: 0; }
+  .hero h1 { font-size: clamp(52px, 8vw, 108px); line-height: 0.92; font-weight: 800; font-style: italic; text-transform: uppercase; max-width: 15ch; }
   .hero h1 em { color: var(--ball); font-style: italic; }
-  .hero p.sub { font-size: 19px; margin-top: 18px; max-width: 46ch; opacity: 0.94; }
-  .hero .btns { margin-top: 28px; }
-  .hero .btn-ghost { color: var(--court-ink); }
+  .hero p.sub { font-size: clamp(18px, 2vw, 23px); max-width: 44ch; color: var(--onblue); }
+  .hero .btns { margin-top: 6px; }
+  .hero .btn-ghost { color: #FFFFFF; }
+  .hero.page .wrap { padding-block: clamp(48px, 7vw, 88px); }
+  .hero.page h1 { font-size: clamp(48px, 7.5vw, 100px); max-width: 14ch; }
   .photo { position: relative; margin: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 18px 40px rgba(3, 20, 38, 0.35); aspect-ratio: 16 / 10; max-width: 100%; background: var(--court-deep); }
   .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .photo figcaption { position: absolute; left: 14px; bottom: 14px; background: rgba(7, 30, 52, 0.82); color: #FFFFFF; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; padding: 6px 12px; border-radius: 999px; }
 
   /* números */
-  .stats { background: var(--surface); border-bottom: 1px solid var(--line); }
-  .stats .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 0; }
-  .stat { padding: 22px 18px; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
-  .stat:first-child { border-left: 0; padding-left: 0; }
-  .stat b { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 40px; line-height: 1; color: var(--court); font-variant-numeric: tabular-nums; }
-  .stat span { color: var(--muted); font-size: 15px; }
+  .stats .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; padding-block: 56px 8px; }
+  .stat { border-top: 6px solid var(--court); padding-top: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .stat b { font-family: var(--display); font-weight: 800; font-style: italic; font-size: clamp(46px, 6vw, 80px); line-height: 1; color: var(--court); font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 16px; }
 
   /* cards de mesma altura */
   .grid { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -110,14 +131,14 @@
 
   /* passos */
   .steps { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
-  .step { border-top: 4px solid var(--court); padding-top: 16px; }
-  .step .n { font-family: var(--display); font-weight: 800; font-size: 46px; color: var(--court); line-height: 1; }
+  .step { border-top: 6px solid var(--court); padding-top: 16px; }
+  .step .n { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 72px; color: var(--court); line-height: 1; }
   .step h3 { font-size: 26px; text-transform: uppercase; margin-top: 6px; }
   .step p { color: var(--muted); margin-top: 6px; }
 
   /* faixa CTA */
   .cta { background: var(--ball); color: var(--ball-ink); border-radius: 20px; padding: 32px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
-  .cta h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 800; font-style: italic; text-transform: uppercase; }
+  .cta h2 { font-size: clamp(36px, 5vw, 60px); line-height: 0.95; font-weight: 800; font-style: italic; text-transform: uppercase; }
   .cta p { margin-top: 6px; max-width: 52ch; }
 
   /* faq */
@@ -152,13 +173,13 @@
   .court-fig { margin: 0; background: var(--court); color: var(--court-ink); border-radius: var(--radius); padding: 18px; }
   .court-fig figcaption { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.85; margin-top: 8px; text-align: center; }
   .pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .pillar { background: var(--court); color: var(--court-ink); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 8px; }
-  .pillar h3 { font-size: 34px; font-style: italic; font-weight: 800; text-transform: uppercase; color: var(--ball); }
-  .pillar p { opacity: 0.92; }
+  .pillar { background: var(--deep-card); border: 1px solid var(--deep-line); color: #FFFFFF; border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 8px; }
+  .pillar h3 { font-size: 44px; font-style: italic; font-weight: 800; text-transform: uppercase; color: var(--ball); }
+  .pillar p { color: var(--onblue); }
 
   /* produtos */
   .brand-band { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 24px; align-items: center; background: var(--court-deep); color: var(--court-ink); border-radius: var(--radius); padding: 22px 26px; margin-bottom: 26px; }
-  .brand-band .badge { font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 30px; background: var(--ball); color: var(--ball-ink); border-radius: 10px; padding: 6px 14px; line-height: 1; }
+  .brand-band .badge { font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 30px; background: var(--ball); color: var(--ball-ink); border-radius: 10px; padding: 6px 14px; line-height: 1; justify-self: start; }
   .brand-band p { opacity: 0.92; }
   .brand-band strong { display: block; font-size: 19px; opacity: 1; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
@@ -208,14 +229,12 @@
   .wa-float { position: fixed; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 25; width: 58px; height: 58px; border-radius: 50%; background: var(--wa); color: var(--wa-ink); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-decoration: none; }
 
   @media (max-width: 900px) {
-    .hero .wrap, .about, .split { grid-template-columns: minmax(0, 1fr); }
-    .hero .wrap { padding-block: 32px 40px; gap: 28px; }
+    .about, .split { grid-template-columns: minmax(0, 1fr); }
+    .hero::after { background: linear-gradient(180deg, var(--shade-mid) 0%, var(--shade) 100%); }
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .steps, .pillars { grid-template-columns: minmax(0, 1fr); }
     .unit { grid-template-columns: minmax(0, 1fr); }
     .stats .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .stat:nth-child(3) { border-left: 0; padding-left: 0; }
-    .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
     .brand-band { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 560px) {
@@ -226,7 +245,7 @@
     .btns .btn { flex: 1 1 100%; }
     .cta { padding: 24px; }
     .band { padding-block: 48px; }
-    .stat b { font-size: 34px; }
+    .hero-logo { width: 68px; height: 68px; }
     .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .product .body { padding: 12px; }
     .product h3 { font-size: 20px; }
@@ -280,8 +299,9 @@
   <!-- ============================================================ INÍCIO -->
   <section class="view" data-view="inicio">
     <div class="hero">
+      <img class="hero-bg" src="__ARENA__" alt="" width="1100" height="679">
       <div class="wrap">
-        <div>
+          <img class="hero-logo" src="__LOGO__" alt="Logo da Speed Padel" width="88" height="88">
           <p class="eyebrow">Padel desde 2019 em Camaquã</p>
           <h1>Nunca jogou? <em>A gente monta o seu jogo.</em></h1>
           <p class="sub">Aulas com professores parceiros para o primeiro contato, grupos e duplas organizados para quem está começando e uma comunidade de 291 jogadores.</p>
@@ -291,11 +311,6 @@
             </a>
             <a class="btn btn-ghost js-wa" data-msg="Olá! Nunca joguei padel e quero agendar uma aula com um professor parceiro." href="#contatos">Quero uma aula</a>
           </div>
-        </div>
-        <figure class="photo">
-          <img src="__ARENA__" alt="Quadra coberta da Speed Padel, com piso azul, rede no centro e jogadoras em partida" width="1100" height="679">
-          <figcaption>Quadra coberta · Centro de Camaquã</figcaption>
-        </figure>
       </div>
     </div>
 
@@ -308,11 +323,11 @@
       </div>
     </div>
 
-    <div class="band">
+    <div class="band dark" style="margin-top: 56px">
       <div class="wrap">
         <div class="head">
           <p class="eyebrow">Por que jogar na Speed</p>
-          <h2 class="h2">Comunidade, performance e diversão</h2>
+          <h2 class="h2">Comunidade, performance e <span class="hl">diversão</span></h2>
         </div>
         <div class="grid">
           <article class="card"><span class="ico"><svg width="24" height="24"><use href="#i-pair"/></svg></span><h3>Grupos para iniciantes</h3><p>Uma responsável dedicada fecha grupos e duplas para “dar jogo”. Você não precisa ter parceiro.</p></article>
@@ -325,7 +340,7 @@
       </div>
     </div>
 
-    <div class="band tight">
+    <div class="band">
       <div class="wrap">
         <div class="head">
           <p class="eyebrow">Seu primeiro jogo</p>
@@ -391,11 +406,18 @@
 
   <!-- ============================================================ INSTITUCIONAL -->
   <section class="view" data-view="institucional" hidden>
+    <div class="hero page">
+      <img class="hero-bg js-arena" alt="" width="1100" height="679">
+      <div class="wrap">
+        <p class="eyebrow">Institucional · desde 2019</p>
+        <h1>Sobre a <em>Speed Padel</em></h1>
+        <p class="sub">Uma quadra coberta no centro de Camaquã e uma comunidade que não deixa ninguém sem jogo.</p>
+      </div>
+    </div>
     <div class="band">
       <div class="wrap about">
         <div class="prose">
-          <p class="eyebrow">Institucional</p>
-          <h2 class="h2">Sobre a Speed Padel</h2>
+          <h3 style="margin-top:0">Desde 2019 em Camaquã</h3>
           <p>A Speed Padel joga padel em Camaquã desde 2019. Começou com uma quadra e virou o ponto de encontro de uma comunidade que hoje reúne 291 pessoas.</p>
           <h3>Ninguém fica sem jogo</h3>
           <p>Temos uma responsável que trabalha só para isso: organizar grupos e fechar duplas para “dar jogo”. Quem está começando faz uma aula com um dos nossos professores parceiros e depois entra num grupo do seu nível.</p>
@@ -408,7 +430,7 @@
         </div>
         <div class="side">
           <figure class="photo" style="aspect-ratio: 4 / 3">
-            <img src="__ARENA__" alt="Vista do alto da quadra azul da Speed Padel durante um jogo" width="1100" height="679">
+            <img class="js-arena" alt="Vista do alto da quadra azul da Speed Padel durante um jogo" width="1100" height="679">
             <figcaption>Nossa quadra coberta</figcaption>
           </figure>
           <aside class="specs" aria-label="Ficha da arena">
@@ -431,11 +453,11 @@
       </div>
     </div>
 
-    <div class="band tight">
+    <div class="band dark">
       <div class="wrap">
         <div class="head">
           <p class="eyebrow">O que nos move</p>
-          <h2 class="h2">O jeito Speed de jogar</h2>
+          <h2 class="h2">O jeito <span class="hl">Speed</span> de jogar</h2>
         </div>
         <div class="pillars">
           <article class="pillar"><h3>Comunidade</h3><p>O jogo acaba, a amizade continua. Muita gente começou sozinha e hoje joga toda semana com a turma.</p></article>
@@ -463,13 +485,16 @@
 
   <!-- ============================================================ PRODUTOS -->
   <section class="view" data-view="produtos" hidden>
+    <div class="hero page">
+      <img class="hero-bg js-arena" alt="" width="1100" height="679">
+      <div class="wrap">
+        <p class="eyebrow">Produtos · Loja oficial Compass</p>
+        <h1>Equipamentos <em>e bebidas</em></h1>
+        <p class="sub">Escolha o produto e peça pelo WhatsApp. A gente confirma preço, modelo e tamanho e separa para você retirar na arena.</p>
+      </div>
+    </div>
     <div class="band">
       <div class="wrap">
-        <div class="head">
-          <p class="eyebrow">Produtos</p>
-          <h2 class="h2">Equipamentos e bebidas</h2>
-          <p class="lead">Escolha o produto e peça pelo WhatsApp. A gente confirma preço, modelo e tamanho e separa para você retirar na arena.</p>
-        </div>
         <div class="brand-band">
           <span class="badge">Compass</span>
           <p><strong>Loja oficial Compass na região</strong>Raquetes e acessórios com garantia de revenda oficial.</p>
@@ -484,12 +509,18 @@
 
   <!-- ============================================================ CONTATOS -->
   <section class="view" data-view="contatos" hidden>
+    <div class="hero page">
+      <img class="hero-bg js-arena" alt="" width="1100" height="679">
+      <div class="wrap">
+        <img class="hero-logo js-logo" alt="Logo da Speed Padel" width="88" height="88">
+        <p class="eyebrow">Contatos · Camaquã/RS</p>
+        <h1>Fale com a <em>Speed</em></h1>
+        <p class="sub">Agende um horário, marque uma aula ou peça para entrar num grupo. Tudo pelo WhatsApp.</p>
+      </div>
+    </div>
     <div class="band">
       <div class="wrap">
         <div class="links-page">
-          <img class="avatar" src="__LOGO__" alt="Logo da Speed Padel" width="112" height="112">
-          <h2>Speed Padel</h2>
-          <p class="lead">Padel desde 2019 em Camaquã · Comunidade, performance e diversão</p>
           <div class="link-list">
             <a class="link-btn hl js-wa" data-msg="Olá! Quero agendar um horário na Speed Padel." href="#contatos">
               <svg width="24" height="24"><use href="#i-wa"/></svg>
@@ -608,6 +639,12 @@
     { cat: "bebidas", name: "Isotônico", desc: "Gatorade e similares para repor sais minerais.", price: null },
     { cat: "bebidas", name: "Energético", desc: "Gelado, para consumo na arena.", price: null },
   ];
+
+  /* reaproveita a foto e o logo já carregados no início (evita repetir as imagens no arquivo) */
+  const arenaSrc = document.querySelector(".hero-bg[src]").src;
+  const logoSrc = document.querySelector(".hero-logo[src]").src;
+  document.querySelectorAll(".js-arena").forEach((i) => (i.src = arenaSrc));
+  document.querySelectorAll(".js-logo").forEach((i) => (i.src = logoSrc));
 
   const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
   const digits = (s) => String(s || "").replace(/\D/g, "");
