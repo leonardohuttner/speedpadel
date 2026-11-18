@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Proposta Site Speed Padel</title>
+<style>
+  @font-face { font-family: "Barlow"; font-weight: 400; src: url(fonts/fontsource-barlow/files/barlow-latin-400-normal.woff2); }
+  @font-face { font-family: "Barlow"; font-weight: 500; src: url(fonts/fontsource-barlow/files/barlow-latin-500-normal.woff2); }
+  @font-face { font-family: "Barlow"; font-weight: 600; src: url(fonts/fontsource-barlow/files/barlow-latin-600-normal.woff2); }
+  @font-face { font-family: "Barlow"; font-weight: 700; src: url(fonts/fontsource-barlow/files/barlow-latin-700-normal.woff2); }
+  @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url(fonts/fontsource-barlow-condensed/files/barlow-condensed-latin-700-normal.woff2); }
+  @font-face { font-family: "Barlow Condensed"; font-weight: 800; font-style: italic; src: url(fonts/fontsource-barlow-condensed/files/barlow-condensed-latin-800-italic.woff2); }
+  @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-style: italic; src: url(fonts/fontsource-barlow-condensed/files/barlow-condensed-latin-700-italic.woff2); }
+
+  :root {
+    --ink: #0B1D2C; --paper: #F2F6FA; --card: #FFFFFF; --soft: #4A5F70; --line: #D3DEE8;
+    --court: #155E9E; --deep: #0E4677; --deep-card: #155485; --deep-line: #2470AD; --onblue: #D3E4F2;
+    --ball: #D9F24A; --sky: #1A6FB5; --wa: #1E9E58;
+    --display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+    --body: "Barlow", Arial, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 11.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; padding: 18mm 18mm 16mm; display: flex; flex-direction: column; gap: 6mm; page-break-after: always; break-after: page; background: var(--paper); }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  h1, h2, h3 { font-family: var(--display); text-transform: uppercase; margin: 0; line-height: 0.95; }
+  h1 { font-size: 64pt; font-weight: 800; font-style: italic; }
+  h2 { font-size: 34pt; font-weight: 800; font-style: italic; }
+  h3 { font-size: 15pt; font-weight: 700; line-height: 1.05; }
+  p { margin: 0; }
+  .eyebrow { font-size: 9pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sky); }
+  .hl { color: var(--ball); }
+  .muted { color: var(--soft); }
+  .lead { font-size: 13pt; color: var(--soft); max-width: 150mm; }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; font-size: 8.5pt; color: var(--soft); border-top: 1px solid var(--line); padding-top: 3mm; }
+
+  /* capa */
+  .cover { padding: 0; color: #FFFFFF; background: var(--deep); }
+  .cover .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,36,64,0.70) 0%, rgba(8,36,64,0.88) 55%, rgba(8,36,64,0.97) 100%); }
+  .cover .in { position: relative; height: 100%; padding: 24mm 20mm 20mm; display: flex; flex-direction: column; gap: 7mm; }
+  .cover .logo { width: 28mm; height: 28mm; border-radius: 50%; border: 1.2mm solid var(--ball); }
+  .cover .eyebrow { color: var(--ball); }
+  .cover h1 { font-size: 78pt; }
+  .cover .lead { color: var(--onblue); font-size: 15pt; max-width: 140mm; }
+  .cover .who { margin-top: auto; display: flex; justify-content: space-between; align-items: end; color: var(--onblue); font-size: 11pt; }
+  .cover .who b { display: block; color: #FFFFFF; font-family: var(--display); font-style: italic; font-weight: 800; font-size: 20pt; text-transform: uppercase; }
+
+  /* listas e cartões */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 4mm; padding: 5mm; display: flex; flex-direction: column; gap: 2mm; }
+  .card p { color: var(--soft); font-size: 10.5pt; }
+  .tag { font-size: 8pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sky); }
+  .band { background: var(--deep); color: #FFFFFF; border-radius: 4mm; padding: 6mm; display: flex; flex-direction: column; gap: 3mm; }
+  .band .eyebrow { color: var(--ball); }
+  .band p { color: var(--onblue); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+  .step { border-top: 1.5mm solid var(--ball); padding-top: 3mm; display: flex; flex-direction: column; gap: 1.5mm; }
+  .step .n { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 30pt; line-height: 1; color: var(--ball); }
+  .step p { font-size: 10.5pt; }
+
+  /* prints */
+  .shot { margin: 0; display: flex; flex-direction: column; gap: 2mm; min-width: 0; }
+  .shot img { width: 100%; display: block; border-radius: 3mm; border: 1px solid var(--line); box-shadow: 0 2mm 5mm rgba(11, 29, 44, 0.12); background: #FFFFFF; }
+  .shot figcaption { font-size: 9pt; color: var(--soft); }
+  .shot figcaption b { color: var(--ink); }
+  .phone img { border-radius: 5mm; border: 1.6mm solid var(--ink); height: 92mm; object-fit: cover; object-position: top; }
+  .row { display: grid; gap: 5mm; align-items: start; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 10.5pt; }
+  td, th { text-align: left; padding: 2.4mm 0; border-top: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 8pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); border-top: 0; }
+  td:first-child { font-weight: 600; width: 38%; padding-right: 4mm; }
+  code { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt; background: #E3EBF2; padding: 0.3mm 1.4mm; border-radius: 1mm; }
+
+  .price { background: var(--ball); color: var(--ink); border-radius: 4mm; padding: 7mm; display: flex; justify-content: space-between; align-items: center; gap: 6mm; }
+  .price .v { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 40pt; line-height: 1; }
+  .fill { border-bottom: 0.5mm dashed var(--ink); display: inline-block; min-width: 55mm; }
+  ul.check { list-style: none; margin: 0; padding: 0; display: grid; gap: 2mm; }
+  ul.check li { padding-left: 6mm; position: relative; }
+  ul.check li::before { content: ""; position: absolute; left: 0; top: 1.9mm; width: 2.6mm; height: 2.6mm; border-radius: 50%; background: var(--court); }
+  .band ul.check li::before { background: var(--ball); }
+</style>
+</head>
+<body>
+
+<!-- 1. CAPA -->
+<section class="page cover">
+  <img class="bg" src="img/arena.jpg" alt="">
+  <div class="shade"></div>
+  <div class="in">
+    <img class="logo" src="img/logo.png" alt="Logo da Speed Padel">
+    <p class="eyebrow">Proposta comercial · Novembro de 2026</p>
+    <h1>O novo site da <span class="hl">Speed Padel</span></h1>
+    <p class="lead">Um site simples e bonito, feito para o celular, que leva quem visita direto para o WhatsApp: agendar horário, marcar aula, entrar num grupo ou pedir um produto Compass.</p>
+    <div class="who">
+      <div><b>Leonardo Huttner</b>Desenvolvimento de sites e sistemas</div>
+      <div style="text-align:right">Speed Padel · Camaquã/RS</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. O QUE VOCÊ RECEBE -->
+<section class="page">
+  <p class="eyebrow">O que está incluído</p>
+  <h2>Tudo o que o site entrega</h2>
+  <p class="lead">O site já está pronto em versão de prévia. Depois da aprovação e da confirmação de alguns dados, ele vai para o ar no endereço escolhido.</p>
+
+  <div class="grid2">
+    <div class="card"><span class="tag">4 páginas</span><h3>Início, Institucional, Produtos e Contatos</h3><p>Navegação simples por abas, com o logo e a foto real da quadra.</p></div>
+    <div class="card"><span class="tag">Celular primeiro</span><h3>Pensado para quem abre pelo Instagram</h3><p>Funciona bem no celular, no tablet e no computador, em tema claro ou escuro.</p></div>
+    <div class="card"><span class="tag">WhatsApp</span><h3>Mensagem pronta em cada botão</h3><p>Agendar horário, marcar aula, entrar num grupo ou pedir um produto: o cliente toca e a conversa já abre escrita.</p></div>
+    <div class="card"><span class="tag">Loja Compass</span><h3>Vitrine de produtos</h3><p>Raquetes, bolinhas, grips, protetores e roupas, separados por categoria, sem mostrar estoque. Preço opcional.</p></div>
+    <div class="card"><span class="tag">Contatos</span><h3>Página no estilo “link da bio”</h3><p>Todos os atalhos num lugar só, com botão de como chegar, copiar endereço e formulário que envia pelo WhatsApp.</p></div>
+    <div class="card"><span class="tag">Sem mensalidade de sistema</span><h3>Site leve e rápido</h3><p>Não precisa de banco de dados nem painel pago. A hospedagem pode ser gratuita; o domínio próprio (.com.br) é opcional.</p></div>
+  </div>
+
+  <div class="band">
+    <p class="eyebrow">A mensagem do site</p>
+    <h3 style="font-size:24pt;font-style:italic;font-weight:800">Aqui sempre <span class="hl">tem jogo.</span></h3>
+    <p>O destaque é a gestão ativa da Speed: uma responsável organiza os grupos e fecha as duplas por nível, para ninguém ficar sem jogo. Quem já joga é encaixado na turma certa, e quem está começando tem espaço, com aula de professor parceiro.</p>
+  </div>
+
+  <div class="foot"><span>Proposta · Site Speed Padel</span><span>2</span></div>
+</section>
+
+<!-- 3. TELAS: INÍCIO -->
+<section class="page">
+  <p class="eyebrow">Telas do site · Início</p>
+  <h2>A primeira impressão</h2>
+  <figure class="shot"><img src="img/sp-inicio.png" alt="Página inicial do site no computador"><figcaption><b>Início no computador.</b> Foto da quadra em destaque, a mensagem principal e os botões de agendar horário e começar a jogar.</figcaption></figure>
+  <div class="row" style="grid-template-columns: 1.9fr 1fr;">
+    <figure class="shot"><img src="img/sp-inicio2.png" alt="Números e diferenciais da Speed Padel"><figcaption><b>Números e diferenciais.</b> Desde 2019, a comunidade, a quadra coberta e a loja Compass.</figcaption></figure>
+    <figure class="shot phone"><img src="img/sp-inicio-m.png" alt="Página inicial no celular"><figcaption><b>No celular.</b></figcaption></figure>
+  </div>
+  <div class="foot"><span>Proposta · Site Speed Padel</span><span>3</span></div>
+</section>
+
+<!-- 4. TELAS: OUTRAS PÁGINAS -->
+<section class="page">
+  <p class="eyebrow">Telas do site · Institucional, Produtos e Contatos</p>
+  <h2>As outras páginas</h2>
+  <div class="row" style="grid-template-columns: 1fr 1fr;">
+    <figure class="shot"><img src="img/sp-institucional.png" alt="Página Institucional"><figcaption><b>Institucional.</b> A história desde 2019, a organização dos jogos, os professores parceiros e a ficha da arena.</figcaption></figure>
+    <figure class="shot"><img src="img/sp-produtos.png" alt="Página Produtos"><figcaption><b>Produtos.</b> Loja oficial Compass, com filtro por categoria e botão “Pedir no WhatsApp”.</figcaption></figure>
+  </div>
+  <div class="row" style="grid-template-columns: 1fr 1fr 1fr;">
+    <figure class="shot phone"><img src="img/sp-institucional-m.png" alt="Institucional no celular"><figcaption><b>Institucional</b> no celular.</figcaption></figure>
+    <figure class="shot phone"><img src="img/sp-produtos-m.png" alt="Produtos no celular"><figcaption><b>Produtos</b> no celular.</figcaption></figure>
+    <figure class="shot phone"><img src="img/sp-contatos-m.png" alt="Contatos no celular"><figcaption><b>Contatos</b>, pronta para o link da bio.</figcaption></figure>
+  </div>
+  <div class="foot"><span>Proposta · Site Speed Padel</span><span>4</span></div>
+</section>
+
+<!-- 5. COMO EDITAR -->
+<section class="page">
+  <p class="eyebrow">Como editar · Administração</p>
+  <h2>Como o site é atualizado</h2>
+  <p class="lead">O site não tem painel com login: todos os dados que mudam ficam reunidos num único bloco, no fim do arquivo. Isso deixa o site leve, sem custo de sistema e sem risco de quebrar. As alterações são feitas por mim.</p>
+
+  <figure class="shot"><img src="img/code.png" alt="Bloco de dados editável do site"><figcaption><b>O bloco de dados.</b> Número do WhatsApp, Instagram, endereço no mapa, categorias e produtos (nome, descrição, preço e selo).</figcaption></figure>
+
+  <table>
+    <thead><tr><th>O que muda</th><th>Onde fica</th></tr></thead>
+    <tbody>
+      <tr><td>Número do WhatsApp</td><td><code>CONFIG.WHATSAPP</code>, só números, com 55 e DDD. Todos os botões do site usam esse número.</td></tr>
+      <tr><td>Instagram e endereço no mapa</td><td><code>CONFIG.INSTAGRAM</code> e <code>CONFIG.MAPS</code></td></tr>
+      <tr><td>Incluir ou tirar um produto</td><td>Uma linha em <code>PRODUCTS</code> com categoria, nome e descrição</td></tr>
+      <tr><td>Preço</td><td><code>price: null</code> mostra “Consulte o preço”; <code>price: 49.9</code> mostra R$ 49,90</td></tr>
+      <tr><td>Selo no produto (ex.: Compass, Novidade)</td><td><code>tag: "Novidade"</code></td></tr>
+      <tr><td>Textos, fotos e horários</td><td>Direto nas páginas; envio a nova versão para aprovação</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot"><span>Proposta · Site Speed Padel</span><span>5</span></div>
+</section>
+
+<!-- 6. ATUALIZAÇÕES E HOSPEDAGEM -->
+<section class="page">
+  <p class="eyebrow">Atualizações e hospedagem</p>
+  <h2>Depois que o site estiver no ar</h2>
+  <p class="lead">Mudou um preço, chegou raquete nova ou o horário vai mudar? Basta me avisar. O endereço do site continua o mesmo.</p>
+  <div class="band">
+    <p class="eyebrow">Como pedir uma alteração</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3>Você me manda</h3><p>Pelo WhatsApp: o produto novo, o preço, a foto ou o texto.</p></div>
+      <div class="step"><span class="n">2</span><h3>Eu altero</h3><p>Atualizo o bloco de dados ou a página e confiro no celular.</p></div>
+      <div class="step"><span class="n">3</span><h3>Vai para o ar</h3><p>A nova versão é publicada no mesmo endereço, sem mudar o link.</p></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card"><span class="tag">Hospedagem</span><h3>Sem mensalidade de sistema</h3><p>Como o site é um arquivo único, sem banco de dados, ele pode ficar hospedado gratuitamente (GitHub Pages, Vercel ou Netlify), com cadeado de segurança (https).</p></div>
+    <div class="card"><span class="tag">Endereço</span><h3>Domínio próprio, se quiser</h3><p>Algo como speedpadel.com.br, registrado no Registro.br em nome da Speed. É um custo anual pago direto ao Registro.br.</p></div>
+    <div class="card"><span class="tag">Instagram</span><h3>Link da bio</h3><p>A página Contatos substitui o link atual da bio, com todos os atalhos num lugar só.</p></div>
+    <div class="card"><span class="tag">Opcional</span><h3>Fotos profissionais</h3><p>Fotos da turma jogando, dos produtos e da fachada deixam o site ainda mais forte. Contratadas à parte.</p></div>
+  </div>
+  <div class="foot"><span>Proposta · Site Speed Padel</span><span>6</span></div>
+</section>
+
+<!-- 6. PORTFÓLIO -->
+<section class="page">
+  <p class="eyebrow">Trabalhos anteriores</p>
+  <h2>Outros projetos que desenvolvi</h2>
+  <figure class="shot"><img src="img/dl.png" alt="Site da DL Artigos Gaúchos"><figcaption><b>DL Artigos Gaúchos · dlartigosgauchos.com.br.</b> Loja online de cuias, bombas e erva-mate de Camaquã, com catálogo por categoria, promoções, carrinho e gestão de pedidos.</figcaption></figure>
+  <div class="row" style="grid-template-columns: 1fr 1fr;">
+    <figure class="shot"><img src="img/bills.png" alt="MyBills"><figcaption><b>MyBills · bills.leonardohuttner.com.br.</b> App de gestão financeira: cartões, contas, veículos e investimentos num painel, com importação de fatura direto do PDF.</figcaption></figure>
+    <figure class="shot"><img src="img/crm.png" alt="CRM Engine"><figcaption><b>CRM · crm.leonardohuttner.com.br.</b> CRM conectado ao ERP (Bling), que sincroniza pedidos, clientes e produtos e mostra o histórico de compra de cada cliente.</figcaption></figure>
+  </div>
+  <div class="foot"><span>Proposta · Site Speed Padel</span><span>7</span></div>
+</section>
+
+<!-- 7. INVESTIMENTO E PRÓXIMOS PASSOS -->
+<section class="page">
+  <p class="eyebrow">Investimento e próximos passos</p>
+  <h2>Para colocar no ar</h2>
+
+  <div class="price">
+    <div><p class="eyebrow" style="color:var(--ink)">Investimento</p><h3 style="font-size:18pt">Site completo da Speed Padel</h3><p>Forma de pagamento: <span class="fill">&nbsp;</span></p></div>
+    <div class="v">R$ <span class="fill">&nbsp;</span></div>
+  </div>
+
+  <div class="card"><span class="tag">Incluído</span>
+      <ul class="check">
+        <li>As 4 páginas prontas, com as fotos e os textos da Speed</li>
+        <li>Publicação do site e configuração do endereço</li>
+        <li>Ajustes após a confirmação dos dados</li>
+        <li>Link da página Contatos para a bio do Instagram</li>
+      </ul>
+    <p>Custos à parte, se quiser: domínio próprio e fotos profissionais.</p>
+  </div>
+
+  <div class="band">
+    <p class="eyebrow">Dados para confirmar antes de publicar</p>
+    <ul class="check">
+      <li>Número do WhatsApp (o link da bio está sem o 55 do Brasil)</li>
+      <li>Endereço exato e horários de funcionamento</li>
+      <li>Modelos Compass e, se quiser, os preços</li>
+      <li>Se os 291 membros da comunidade podem aparecer no site</li>
+      <li>Logo em alta resolução e mais fotos (turma jogando, produtos, fachada)</li>
+      <li>Nomes dos professores parceiros e da organizadora dos grupos (opcional)</li>
+    </ul>
+  </div>
+
+  <div class="steps">
+    <div class="step" style="border-top-color:var(--court)"><span class="n" style="color:var(--court)">1</span><h3>Aprovação</h3><p class="muted">Você aprova a proposta e o visual da prévia.</p></div>
+    <div class="step" style="border-top-color:var(--court)"><span class="n" style="color:var(--court)">2</span><h3>Dados</h3><p class="muted">Confirmamos os itens da lista acima.</p></div>
+    <div class="step" style="border-top-color:var(--court)"><span class="n" style="color:var(--court)">3</span><h3>No ar</h3><p class="muted">Publico o site e entrego o link para a bio.</p></div>
+  </div>
+  <div class="foot"><span>Leonardo Huttner · Proposta · Site Speed Padel</span><span>8</span></div>
+</section>
+
+</body>
+</html>
