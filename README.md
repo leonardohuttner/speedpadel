@@ -24,6 +24,6 @@ Qualquer hospedagem de site estático serve:
 
 - Número do WhatsApp: o link da bio (wa.me/5198809971) está sem o 55; no site usamos 555198809971
 - Endereço (Av. Sete de Setembro, 388 – Centro, achado em guia online) e horários
-- Nome da organizadora (opcional)
+- Nomes e fotos dos professores parceiros (opcional)
 - Mais fotos (turma, produtos, fachada)
 - Produtos reais e preços
