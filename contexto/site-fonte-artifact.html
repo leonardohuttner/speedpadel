@@ -1,0 +1,733 @@
+<title>Speed Padel Camaquã</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Speed Padel Camaquã: padel desde 2019, comunidade ativa, jogos para iniciantes e loja oficial Compass na região.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+  /* Layout: cabeçalho fixo azul com abas por hash (#inicio, #institucional, #produtos, #contatos);
+     faixa hero com a foto real da quadra; faixa de números; seções em coluna de até 1160px. */
+  :root {
+    --bg: #F2F6FA;
+    --surface: #FFFFFF;
+    --fg: #0B1D2C;
+    --muted: #4A5F70;
+    --line: #D3DEE8;
+    --court: #155E9E;      /* azul do logo e da quadra */
+    --court-deep: #0E4677;
+    --court-ink: #FFFFFF;
+    --ball: #D9F24A;       /* amarelo-limão da bolinha */
+    --ball-ink: #0B1D2C;
+    --turf: #1A6FB5;
+    --wa: #1E9E58;
+    --wa-ink: #FFFFFF;
+    --err: #B3261E;
+    --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+    --radius: 16px;
+    --max: 1160px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #07131D; --surface: #0E1F2D; --fg: #E7F0F7; --muted: #9DB3C4; --line: #213A4F;
+      --court: #1B6CB0; --court-deep: #0C3A62; --court-ink: #FFFFFF; --ball: #D9F24A; --ball-ink: #0B1D2C;
+      --turf: #7DBBF0; --wa: #21A85F; --wa-ink: #FFFFFF; --err: #FF8A80; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #07131D; --surface: #0E1F2D; --fg: #E7F0F7; --muted: #9DB3C4; --line: #213A4F;
+    --court: #1B6CB0; --court-deep: #0C3A62; --court-ink: #FFFFFF; --ball: #D9F24A; --ball-ink: #0B1D2C;
+    --turf: #7DBBF0; --wa: #21A85F; --wa-ink: #FFFFFF; --err: #FF8A80; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--court-deep); }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.02; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ball); outline-offset: 2px; border-radius: 6px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+  /* ---------- cabeçalho */
+  header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--court-deep); color: var(--court-ink); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; padding-block: 10px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo img { width: 44px; height: 44px; border-radius: 50%; flex: none; border: 2px solid rgba(255,255,255,0.85); }
+  .logo b { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; display: block; }
+  .logo small { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; margin-top: 3px; }
+  nav.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav.tabs a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 14px; border-radius: 999px; color: var(--court-ink); }
+  nav.tabs a:hover { background: rgba(255,255,255,0.12); }
+  nav.tabs a[aria-current="page"] { background: var(--ball); color: var(--ball-ink); }
+
+  /* ---------- botões */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 22px; border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-family: var(--body); line-height: 1.2; }
+  .btn-wa { background: var(--wa); color: var(--wa-ink); }
+  .btn-wa:hover { filter: brightness(1.07); }
+  .btn-ball { background: var(--ball); color: var(--ball-ink); }
+  .btn-ghost { background: transparent; color: inherit; border-color: currentColor; }
+  .btn svg { flex: none; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* ---------- estrutura */
+  main { padding-bottom: 96px; } /* reserva espaço para o botão flutuante */
+  .band { padding-block: 64px; }
+  .band.tight { padding-top: 0; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--turf); margin-bottom: 10px; }
+  .h2 { font-size: clamp(34px, 5vw, 50px); font-weight: 800; text-transform: uppercase; font-style: italic; }
+  .lead { color: var(--muted); font-size: 18px; max-width: 62ch; margin-top: 12px; }
+  .head { margin-bottom: 30px; }
+
+  /* hero */
+  .hero { background: linear-gradient(160deg, var(--court) 0%, var(--court-deep) 100%); color: var(--court-ink); }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 44px; align-items: center; padding-block: 52px 60px; }
+  .hero .eyebrow { color: var(--ball); }
+  .hero h1 { font-size: clamp(48px, 7vw, 84px); font-weight: 800; font-style: italic; text-transform: uppercase; }
+  .hero h1 em { color: var(--ball); font-style: italic; }
+  .hero p.sub { font-size: 19px; margin-top: 18px; max-width: 46ch; opacity: 0.94; }
+  .hero .btns { margin-top: 28px; }
+  .hero .btn-ghost { color: var(--court-ink); }
+  .photo { position: relative; margin: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 18px 40px rgba(3, 20, 38, 0.35); aspect-ratio: 16 / 10; max-width: 100%; background: var(--court-deep); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo figcaption { position: absolute; left: 14px; bottom: 14px; background: rgba(7, 30, 52, 0.82); color: #FFFFFF; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; padding: 6px 12px; border-radius: 999px; }
+
+  /* números */
+  .stats { background: var(--surface); border-bottom: 1px solid var(--line); }
+  .stats .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 0; }
+  .stat { padding: 22px 18px; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .stat b { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 40px; line-height: 1; color: var(--court); font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 15px; }
+
+  /* cards de mesma altura */
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .card h3 { font-size: 26px; font-weight: 700; text-transform: uppercase; }
+  .card p { color: var(--muted); }
+  .ico { width: 48px; height: 48px; border-radius: 12px; background: var(--court); color: var(--court-ink); display: grid; place-items: center; flex: none; }
+  .ico.ball { background: var(--ball); color: var(--ball-ink); }
+
+  /* passos */
+  .steps { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+  .step { border-top: 4px solid var(--court); padding-top: 16px; }
+  .step .n { font-family: var(--display); font-weight: 800; font-size: 46px; color: var(--court); line-height: 1; }
+  .step h3 { font-size: 26px; text-transform: uppercase; margin-top: 6px; }
+  .step p { color: var(--muted); margin-top: 6px; }
+
+  /* faixa CTA */
+  .cta { background: var(--ball); color: var(--ball-ink); border-radius: 20px; padding: 32px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
+  .cta h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 800; font-style: italic; text-transform: uppercase; }
+  .cta p { margin-top: 6px; max-width: 52ch; }
+
+  /* faq */
+  .split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 40px; align-items: start; }
+  .faq { display: grid; gap: 10px; }
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 18px; }
+  summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; font-size: 18px; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-family: var(--display); font-size: 26px; line-height: 1; color: var(--court); }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); padding-bottom: 16px; max-width: 70ch; }
+
+  /* unidade */
+  .unit { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 28px; align-items: center; }
+  .unit dl { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; margin: 0; }
+  .unit dt { color: var(--court); padding-top: 2px; }
+  .unit dd { margin: 0; }
+  .pending { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px dashed var(--line); border-radius: 6px; padding: 1px 7px; margin-left: 6px; vertical-align: 2px; }
+
+  /* institucional */
+  .about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 44px; align-items: start; }
+  .prose { max-width: 62ch; display: grid; gap: 14px; }
+  .prose h3 { font-size: 28px; text-transform: uppercase; margin-top: 10px; }
+  .prose p { color: var(--muted); font-size: 18px; }
+  .side { display: grid; gap: 16px; }
+  .specs { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .specs h3 { font-size: 24px; text-transform: uppercase; margin-bottom: 8px; }
+  .specs table { width: 100%; border-collapse: collapse; }
+  .specs td { padding: 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  .specs td:first-child { color: var(--muted); padding-right: 14px; width: 42%; }
+  .specs td:last-child { font-weight: 600; }
+  .court-fig { margin: 0; background: var(--court); color: var(--court-ink); border-radius: var(--radius); padding: 18px; }
+  .court-fig figcaption { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.85; margin-top: 8px; text-align: center; }
+  .pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .pillar { background: var(--court); color: var(--court-ink); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 8px; }
+  .pillar h3 { font-size: 34px; font-style: italic; font-weight: 800; text-transform: uppercase; color: var(--ball); }
+  .pillar p { opacity: 0.92; }
+
+  /* produtos */
+  .brand-band { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 24px; align-items: center; background: var(--court-deep); color: var(--court-ink); border-radius: var(--radius); padding: 22px 26px; margin-bottom: 26px; }
+  .brand-band .badge { font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 30px; background: var(--ball); color: var(--ball-ink); border-radius: 10px; padding: 6px 14px; line-height: 1; }
+  .brand-band p { opacity: 0.92; }
+  .brand-band strong { display: block; font-size: 19px; opacity: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: 15px; cursor: pointer; font-family: var(--body); }
+  .chip[aria-pressed="true"] { background: var(--court); border-color: var(--court); color: var(--court-ink); }
+  .products { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .product { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+  .product .img { aspect-ratio: 1 / 1; max-width: 100%; display: grid; place-items: center; background: linear-gradient(160deg, var(--court) 0%, var(--court-deep) 100%); color: var(--court-ink); position: relative; }
+  .product .img svg { width: 44%; height: 44%; }
+  .product .img .tag { position: absolute; left: 10px; top: 10px; background: var(--ball); color: var(--ball-ink); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 6px; padding: 3px 8px; }
+  .product .body { padding: 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .product .cat { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--turf); }
+  .product h3 { font-size: 24px; font-weight: 700; text-transform: uppercase; }
+  .product p { color: var(--muted); font-size: 15px; }
+  .product .price { font-weight: 700; margin-top: auto; padding-top: 6px; }
+  .product .btn { width: 100%; margin-top: 8px; min-height: 42px; font-size: 15px; }
+  .note { font-size: 15px; color: var(--muted); margin-top: 18px; }
+
+  /* contatos (estilo Linktree) */
+  .links-page { max-width: 560px; margin: 0 auto; text-align: center; }
+  .links-page .avatar { width: 112px; height: 112px; border-radius: 50%; margin: 0 auto 14px; border: 4px solid var(--ball); display: block; }
+  .links-page h2 { font-size: 42px; font-weight: 800; font-style: italic; text-transform: uppercase; }
+  .links-page .lead { margin: 8px auto 24px; }
+  .link-list { display: grid; gap: 12px; text-align: left; }
+  .link-btn { display: grid; grid-template-columns: 28px minmax(0, 1fr) 18px; align-items: center; gap: 14px; min-height: 60px; padding: 12px 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; font-weight: 700; font-size: 17px; }
+  .link-btn:hover { border-color: var(--court); }
+  .link-btn.hl { background: var(--wa); border-color: var(--wa); color: var(--wa-ink); }
+  .link-btn small { display: block; font-weight: 500; font-size: 14px; color: var(--muted); }
+  .link-btn.hl small { color: var(--wa-ink); opacity: 0.92; }
+  .copy-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-top: 18px; font-size: 15px; color: var(--muted); }
+  .copy-row button { font: inherit; font-weight: 600; background: none; border: 1px solid var(--line); color: var(--fg); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+  form.contact { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; margin-top: 28px; }
+  form.contact h3 { font-size: 26px; text-transform: uppercase; }
+  .field { display: grid; gap: 6px; }
+  .field label { font-weight: 600; font-size: 15px; }
+  .field input, .field textarea, .field select { font: inherit; font-size: 16px; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .field .err { color: var(--err); font-size: 14px; }
+  .form-msg { font-size: 15px; border-radius: 10px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); }
+
+  /* rodapé */
+  footer.site { background: var(--court-deep); color: var(--court-ink); }
+  footer.site .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding-block: 24px 28px; font-size: 15px; }
+  footer.site nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  footer.site a { text-decoration: none; font-weight: 600; }
+
+  .wa-float { position: fixed; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 25; width: 58px; height: 58px; border-radius: 50%; background: var(--wa); color: var(--wa-ink); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .hero .wrap, .about, .split { grid-template-columns: minmax(0, 1fr); }
+    .hero .wrap { padding-block: 32px 40px; gap: 28px; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .steps, .pillars { grid-template-columns: minmax(0, 1fr); }
+    .unit { grid-template-columns: minmax(0, 1fr); }
+    .stats .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .brand-band { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 560px) {
+    header.top .wrap { justify-content: center; }
+    nav.tabs { justify-content: center; }
+    nav.tabs a { padding: 7px 10px; font-size: 14px; }
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .btns .btn { flex: 1 1 100%; }
+    .cta { padding: 24px; }
+    .band { padding-block: 48px; }
+    .stat b { font-size: 34px; }
+    .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .product .body { padding: 12px; }
+    .product h3 { font-size: 20px; }
+    .product p { font-size: 14px; }
+    .product .btn { padding: 8px 10px; font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn, .link-btn, .chip { transition: filter .15s, border-color .15s, background-color .15s; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.230 8.23 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.230 2.2 0 4.270.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.230-1.470-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.29Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11"/><rect x="3" y="11" width="18" height="6" rx="2"/><path d="M6 17v2M18 17v2"/></g><circle cx="7.5" cy="14" r="1" fill="currentColor"/><circle cx="16.5" cy="14" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-nav" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m3 11 19-9-9 19-2-8-8-2Z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z M3 6h18 M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 16v-5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.8"/><path d="M16.5 14.6c2.6.2 4.4 1.9 5 5.4"/></g></symbol>
+    <symbol id="i-pair" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M2 20c.5-3.5 2.4-5.5 5-5.5s4.5 2 5 5.5M12 20c.5-3.5 2.4-5.5 5-5.5s4.5 2 5 5.5"/></g></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M8 6H4a3 3 0 0 0 4 4M16 6h4a3 3 0 0 1-4 4M12 13v4M8 21h8M9 17h6"/></g></symbol>
+    <symbol id="i-drink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 2h6v3l2 3v12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V8l2-3Z"/><path d="M7 12h10"/></g></symbol>
+    <symbol id="i-racket" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="10" cy="9" rx="6.5" ry="7"/><path d="M14.5 14.2 20 21"/><circle cx="8" cy="7" r=".6" fill="currentColor"/><circle cx="11" cy="6" r=".6" fill="currentColor"/><circle cx="9" cy="10" r=".6" fill="currentColor"/><circle cx="12" cy="9.5" r=".6" fill="currentColor"/><circle cx="7" cy="11" r=".6" fill="currentColor"/></g></symbol>
+    <symbol id="i-ball" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M4.5 7c3.5 1.5 3.5 8.5 0 10M19.5 7c-3.5 1.5-3.5 8.5 0 10"/></g></symbol>
+    <symbol id="i-grip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="2" width="8" height="20" rx="3"/><path d="M8 7l8-3M8 12l8-3M8 17l8-3M8 21l8-2.5"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M8 3 3 6l2 5 2-1v11h10V10l2 1 2-5-5-3a4 4 0 0 1-8 0Z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Speed Padel, início">
+      <img src="__LOGO__" alt="" width="44" height="44">
+      <span><b>Speed Padel</b><small>Camaquã · desde 2019</small></span>
+    </a>
+    <nav class="tabs" aria-label="Páginas">
+      <a href="#inicio" data-tab="inicio">Início</a>
+      <a href="#institucional" data-tab="institucional">Institucional</a>
+      <a href="#produtos" data-tab="produtos">Produtos</a>
+      <a href="#contatos" data-tab="contatos">Contatos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============================================================ INÍCIO -->
+  <section class="view" data-view="inicio">
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">Padel desde 2019 em Camaquã</p>
+          <h1>Nunca jogou? <em>A gente monta o seu jogo.</em></h1>
+          <p class="sub">Aulas com professores parceiros para o primeiro contato, grupos e duplas organizados para quem está começando e uma comunidade de 291 jogadores.</p>
+          <div class="btns">
+            <a class="btn btn-ball js-wa" data-msg="Olá! Quero agendar um horário na Speed Padel." href="#contatos">
+              <svg width="20" height="20"><use href="#i-cal"/></svg>Agendar horário
+            </a>
+            <a class="btn btn-ghost js-wa" data-msg="Olá! Nunca joguei padel e quero agendar uma aula com um professor parceiro." href="#contatos">Quero uma aula</a>
+          </div>
+        </div>
+        <figure class="photo">
+          <img src="__ARENA__" alt="Quadra coberta da Speed Padel, com piso azul, rede no centro e jogadoras em partida" width="1100" height="679">
+          <figcaption>Quadra coberta · Centro de Camaquã</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="stats" aria-label="Números da Speed Padel">
+      <div class="wrap">
+        <div class="stat"><b>2019</b><span>jogando padel em Camaquã</span></div>
+        <div class="stat"><b>291</b><span>pessoas na comunidade</span></div>
+        <div class="stat"><b>1</b><span>quadra coberta</span></div>
+        <div class="stat"><b>Compass</b><span>loja oficial na região</span></div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="wrap">
+        <div class="head">
+          <p class="eyebrow">Por que jogar na Speed</p>
+          <h2 class="h2">Comunidade, performance e diversão</h2>
+        </div>
+        <div class="grid">
+          <article class="card"><span class="ico"><svg width="24" height="24"><use href="#i-pair"/></svg></span><h3>Grupos para iniciantes</h3><p>Uma responsável dedicada fecha grupos e duplas para “dar jogo”. Você não precisa ter parceiro.</p></article>
+          <article class="card"><span class="ico"><svg width="24" height="24"><use href="#i-users"/></svg></span><h3>Aulas com professores</h3><p>Professores de padel parceiros ensinam o básico antes do primeiro jogo. É o jeito recomendado de começar.</p></article>
+          <article class="card"><span class="ico"><svg width="24" height="24"><use href="#i-cal"/></svg></span><h3>Agendamento fácil</h3><p>Reserve seu horário direto pelo WhatsApp, em poucas mensagens.</p></article>
+          <article class="card"><span class="ico ball"><svg width="24" height="24"><use href="#i-trophy"/></svg></span><h3>Loja oficial Compass</h3><p>Revenda oficial Compass na região: raquetes, bolinhas, grips, protetores e roupas.</p></article>
+          <article class="card"><span class="ico"><svg width="24" height="24"><use href="#i-car"/></svg></span><h3>Centro com estacionamento</h3><p>Fácil de chegar, no centro da cidade, com lugar para estacionar.</p></article>
+          <article class="card"><span class="ico"><svg width="24" height="24"><use href="#i-drink"/></svg></span><h3>Bebidas geladas</h3><p>Água, isotônico e energético para se hidratar antes, durante e depois do jogo.</p></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="band tight">
+      <div class="wrap">
+        <div class="head">
+          <p class="eyebrow">Seu primeiro jogo</p>
+          <h2 class="h2">Do zero à quadra em 3 passos</h2>
+        </div>
+        <ol class="steps">
+          <li class="step"><div class="n">1</div><h3>Chame no WhatsApp</h3><p>Diga que quer começar. Não precisa ter dupla nem raquete.</p></li>
+          <li class="step"><div class="n">2</div><h3>Faça uma aula</h3><p>Recomendado para o primeiro jogo: um professor parceiro ensina pegada, saque e posicionamento.</p></li>
+          <li class="step"><div class="n">3</div><h3>Entre num grupo e jogue</h3><p>A organizadora encaixa você num grupo do seu nível e fecha as duplas.</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="band tight">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <h2>Bora pra quadra?</h2>
+            <p>Mande uma mensagem e garanta seu lugar no próximo jogo.</p>
+          </div>
+          <a class="btn btn-wa js-wa" data-msg="Olá! Quero entrar nos próximos jogos da Speed Padel." href="#contatos"><svg width="20" height="20"><use href="#i-wa"/></svg>Chamar no WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Dúvidas</p>
+          <h2 class="h2">Perguntas frequentes</h2>
+          <p class="lead">Não achou sua resposta? Chame no WhatsApp.</p>
+        </div>
+        <div class="faq">
+          <details><summary>Preciso saber jogar para participar?</summary><p>Não. Para o primeiro jogo recomendamos uma aula com um dos nossos professores parceiros. Depois, você entra num grupo de iniciantes com duplas montadas pela organizadora.</p></details>
+          <details><summary>Não tenho dupla. Posso jogar?</summary><p>Pode. O padel é jogado em duplas (4 pessoas na quadra), e a gente encaixa você num jogo.</p></details>
+          <details><summary>Vocês têm aulas?</summary><p>Sim. Trabalhamos com professores de padel parceiros. Chame no WhatsApp para agendar sua aula.</p></details>
+          <details><summary>Como agendo um horário?</summary><p>Pelo WhatsApp. Diga o dia e o horário que prefere e a gente confirma.</p></details>
+          <details><summary>Preciso ter raquete?</summary><p>Para começar, fale com a gente. Se quiser a sua, somos loja oficial Compass na região.</p></details>
+          <details><summary>Tem onde estacionar?</summary><p>Sim. Ficamos no centro de Camaquã e há local para estacionar.</p></details>
+        </div>
+      </div>
+    </div>
+
+    <div class="band tight">
+      <div class="wrap">
+        <div class="card unit">
+          <dl>
+            <dt><svg width="20" height="20"><use href="#i-pin"/></svg></dt>
+            <dd><strong>Speed Padel Camaquã</strong><br>Av. Sete de Setembro, 388 – Centro, Camaquã/RS <span class="pending">a confirmar</span></dd>
+            <dt><svg width="20" height="20"><use href="#i-car"/></svg></dt>
+            <dd>Local para estacionar</dd>
+            <dt><svg width="20" height="20"><use href="#i-cal"/></svg></dt>
+            <dd>Horários com agendamento pelo WhatsApp</dd>
+          </dl>
+          <div class="btns">
+            <a class="btn btn-wa js-wa" data-msg="Olá! Vim pelo site da Speed Padel." href="#contatos"><svg width="20" height="20"><use href="#i-wa"/></svg>WhatsApp</a>
+            <a class="btn btn-ghost js-maps" href="#" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-nav"/></svg>Como chegar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ INSTITUCIONAL -->
+  <section class="view" data-view="institucional" hidden>
+    <div class="band">
+      <div class="wrap about">
+        <div class="prose">
+          <p class="eyebrow">Institucional</p>
+          <h2 class="h2">Sobre a Speed Padel</h2>
+          <p>A Speed Padel joga padel em Camaquã desde 2019. Começou com uma quadra e virou o ponto de encontro de uma comunidade que hoje reúne 291 pessoas.</p>
+          <h3>Ninguém fica sem jogo</h3>
+          <p>Temos uma responsável que trabalha só para isso: organizar grupos e fechar duplas para “dar jogo”. Quem está começando faz uma aula com um dos nossos professores parceiros e depois entra num grupo do seu nível.</p>
+          <h3>Professores parceiros</h3>
+          <p>Para o primeiro jogo, recomendamos uma aula. Nossos professores de padel parceiros ensinam o básico (pegada, saque, posicionamento e uso das paredes) para você chegar ao grupo jogando com confiança.</p>
+          <h3>Loja oficial Compass</h3>
+          <p>Somos revenda oficial Compass na região. Na arena você encontra raquetes, bolinhas, grips, protetores e roupas para jogar com conforto.</p>
+          <h3>O que é o padel</h3>
+          <p>Esporte de raquete jogado em duplas, numa quadra de 20 × 10 metros cercada por paredes. A bola pode bater na parede e seguir em jogo, por isso as trocas são longas e divertidas mesmo para quem está começando. A contagem é a do tênis: 15, 30, 40 e game.</p>
+        </div>
+        <div class="side">
+          <figure class="photo" style="aspect-ratio: 4 / 3">
+            <img src="__ARENA__" alt="Vista do alto da quadra azul da Speed Padel durante um jogo" width="1100" height="679">
+            <figcaption>Nossa quadra coberta</figcaption>
+          </figure>
+          <aside class="specs" aria-label="Ficha da arena">
+            <h3>Ficha da arena</h3>
+            <table>
+              <tbody>
+                <tr><td>Desde</td><td>2019</td></tr>
+                <tr><td>Local</td><td>Centro de Camaquã/RS, com estacionamento</td></tr>
+                <tr><td>Quadra</td><td>1 quadra coberta</td></tr>
+                <tr><td>Comunidade</td><td>291 pessoas</td></tr>
+                <tr><td>Aulas</td><td>Com professores de padel parceiros</td></tr>
+                <tr><td>Iniciantes</td><td>Grupos e duplas montados pela organizadora</td></tr>
+                <tr><td>Agendamento</td><td>Pelo WhatsApp</td></tr>
+                <tr><td>Loja</td><td>Revenda oficial Compass</td></tr>
+                <tr><td>Bebidas</td><td>Água, isotônico, energético e outras</td></tr>
+              </tbody>
+            </table>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="band tight">
+      <div class="wrap">
+        <div class="head">
+          <p class="eyebrow">O que nos move</p>
+          <h2 class="h2">O jeito Speed de jogar</h2>
+        </div>
+        <div class="pillars">
+          <article class="pillar"><h3>Comunidade</h3><p>O jogo acaba, a amizade continua. Muita gente começou sozinha e hoje joga toda semana com a turma.</p></article>
+          <article class="pillar"><h3>Performance</h3><p>Do primeiro saque ao jogo competitivo: jogando com frequência, você evolui no seu ritmo.</p></article>
+          <article class="pillar"><h3>Diversão</h3><p>Padel é leve, social e viciante. Dá para rir, suar e querer voltar no dia seguinte.</p></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <h2>Venha conhecer</h2>
+            <p>Agende um horário, marque uma aula ou peça para entrar num grupo de iniciantes.</p>
+          </div>
+          <div class="btns">
+            <a class="btn btn-wa js-wa" data-msg="Olá! Quero conhecer a Speed Padel." href="#contatos"><svg width="20" height="20"><use href="#i-wa"/></svg>WhatsApp</a>
+            <a class="btn btn-ghost js-maps" href="#" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-nav"/></svg>Como chegar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PRODUTOS -->
+  <section class="view" data-view="produtos" hidden>
+    <div class="band">
+      <div class="wrap">
+        <div class="head">
+          <p class="eyebrow">Produtos</p>
+          <h2 class="h2">Equipamentos e bebidas</h2>
+          <p class="lead">Escolha o produto e peça pelo WhatsApp. A gente confirma preço, modelo e tamanho e separa para você retirar na arena.</p>
+        </div>
+        <div class="brand-band">
+          <span class="badge">Compass</span>
+          <p><strong>Loja oficial Compass na região</strong>Raquetes e acessórios com garantia de revenda oficial.</p>
+          <a class="btn btn-ball js-wa" data-msg="Olá! Quero conhecer os produtos Compass da Speed Padel." href="#contatos">Ver modelos</a>
+        </div>
+        <div class="chips" role="group" aria-label="Filtrar por categoria" id="chips"></div>
+        <div class="products" id="products"></div>
+        <p class="note">Preços e modelos são confirmados pelo WhatsApp. Bebidas são para consumo na arena.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ CONTATOS -->
+  <section class="view" data-view="contatos" hidden>
+    <div class="band">
+      <div class="wrap">
+        <div class="links-page">
+          <img class="avatar" src="__LOGO__" alt="Logo da Speed Padel" width="112" height="112">
+          <h2>Speed Padel</h2>
+          <p class="lead">Padel desde 2019 em Camaquã · Comunidade, performance e diversão</p>
+          <div class="link-list">
+            <a class="link-btn hl js-wa" data-msg="Olá! Quero agendar um horário na Speed Padel." href="#contatos">
+              <svg width="24" height="24"><use href="#i-wa"/></svg>
+              <span>Agendar pelo WhatsApp<small class="js-wa-label">Número a confirmar</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link-btn js-wa" data-msg="Olá! Quero agendar uma aula de padel com um professor parceiro." href="#contatos">
+              <svg width="24" height="24"><use href="#i-users"/></svg>
+              <span>Agendar uma aula<small>Com nossos professores parceiros</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link-btn js-wa" data-msg="Olá! Quero entrar num grupo de iniciantes da Speed Padel." href="#contatos">
+              <svg width="24" height="24"><use href="#i-pair"/></svg>
+              <span>Entrar num grupo<small>Grupos e duplas para iniciantes</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link-btn js-insta" href="#contatos">
+              <svg width="24" height="24"><use href="#i-insta"/></svg>
+              <span>Instagram<small class="js-insta-label">@speedpadel</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link-btn" href="#produtos">
+              <svg width="24" height="24"><use href="#i-bag"/></svg>
+              <span>Loja oficial Compass<small>Raquetes, bolinhas, grips e mais</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link-btn js-maps" href="#" target="_blank" rel="noopener">
+              <svg width="24" height="24"><use href="#i-nav"/></svg>
+              <span>Como chegar<small>Centro de Camaquã · com estacionamento</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link-btn" href="#institucional">
+              <svg width="24" height="24"><use href="#i-info"/></svg>
+              <span>Conheça a Speed<small>Nossa história e a comunidade</small></span>
+              <svg width="18" height="18"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+          <div class="copy-row">
+            <span id="addr-text">Av. Sete de Setembro, 388 – Centro, Camaquã/RS</span>
+            <button type="button" id="copy-addr">Copiar endereço</button>
+          </div>
+          <form class="contact" id="contact-form" novalidate>
+            <h3>Fale com a gente</h3>
+            <div class="field">
+              <label for="c-name">Seu nome</label>
+              <input id="c-name" name="name" autocomplete="name" required maxlength="80">
+              <span class="err" id="c-name-err" hidden></span>
+            </div>
+            <div class="field">
+              <label for="c-subject">Assunto</label>
+              <select id="c-subject" name="subject">
+                <option>Agendar horário</option>
+                <option>Aula com professor</option>
+                <option>Quero entrar num grupo</option>
+                <option>Produtos Compass</option>
+                <option>Outro assunto</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="c-msg">Mensagem</label>
+              <textarea id="c-msg" name="message" required maxlength="800" placeholder="Ex.: Nunca joguei e queria entrar num grupo de iniciantes."></textarea>
+              <span class="err" id="c-msg-err" hidden></span>
+            </div>
+            <button class="btn btn-wa" type="submit"><svg width="20" height="20"><use href="#i-wa"/></svg>Enviar pelo WhatsApp</button>
+            <p class="form-msg" id="c-result" hidden></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Speed Padel · Padel desde 2019 em Camaquã/RS</span>
+    <nav aria-label="Rodapé">
+      <a href="#inicio">Início</a>
+      <a href="#institucional">Institucional</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#contatos">Contatos</a>
+    </nav>
+  </div>
+</footer>
+
+<a class="wa-float js-wa" data-msg="Olá! Vim pelo site da Speed Padel." href="#contatos" aria-label="Falar no WhatsApp">
+  <svg width="30" height="30"><use href="#i-wa"/></svg>
+</a>
+
+<script>
+  /* ====== DADOS DA ARENA — edite aqui ======
+     WHATSAPP: só números, com 55 + DDD. INSTAGRAM: endereço completo do perfil. */
+  const CONFIG = {
+    WHATSAPP: "555198809971",
+    INSTAGRAM: "https://www.instagram.com/speedpadel/",
+    MAPS: "https://www.google.com/maps/search/?api=1&query=Av.+Sete+de+Setembro,+388,+Camaqu%C3%A3+-+RS",
+  };
+
+  const CATEGORIES = [
+    { id: "raquetes", name: "Raquetes", icon: "i-racket" },
+    { id: "bolinhas", name: "Bolinhas", icon: "i-ball" },
+    { id: "grips", name: "Grips", icon: "i-grip" },
+    { id: "protetores", name: "Protetores", icon: "i-shield" },
+    { id: "roupas", name: "Roupas", icon: "i-shirt" },
+    { id: "bebidas", name: "Bebidas", icon: "i-drink" },
+  ];
+
+  /* price: null mostra "Consulte o preço". Ex.: price: 49.9 · tag: selo opcional no canto da foto */
+  const PRODUCTS = [
+    { cat: "raquetes", name: "Raquetes Compass", desc: "Modelos para iniciantes e para quem quer mais performance.", price: null, tag: "Compass" },
+    { cat: "bolinhas", name: "Tubo de bolinhas", desc: "Bolinhas de padel para jogo e treino.", price: null },
+    { cat: "grips", name: "Overgrip", desc: "Mais firmeza e conforto na empunhadura.", price: null },
+    { cat: "protetores", name: "Protetor de raquete", desc: "Protege a borda da raquete contra batidas no chão e na parede.", price: null },
+    { cat: "roupas", name: "Camiseta", desc: "Tecido leve para jogar. Tamanhos sob consulta.", price: null },
+    { cat: "roupas", name: "Short / saia", desc: "Conforto para se movimentar na quadra.", price: null },
+    { cat: "bebidas", name: "Água mineral", desc: "Gelada, para consumo na arena.", price: null },
+    { cat: "bebidas", name: "Isotônico", desc: "Gatorade e similares para repor sais minerais.", price: null },
+    { cat: "bebidas", name: "Energético", desc: "Gelado, para consumo na arena.", price: null },
+  ];
+
+  const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  const digits = (s) => String(s || "").replace(/\D/g, "");
+  const hasWa = digits(CONFIG.WHATSAPP).length >= 12;
+  const waUrl = (msg) => `https://wa.me/${digits(CONFIG.WHATSAPP)}?text=${encodeURIComponent(msg)}`;
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  function formatPhone(d) {
+    const l = d.startsWith("55") ? d.slice(2) : d;
+    if (l.length === 11) return `(${l.slice(0, 2)}) ${l.slice(2, 7)}-${l.slice(7)}`;
+    if (l.length === 10) return `(${l.slice(0, 2)}) ${l.slice(2, 6)}-${l.slice(6)}`;
+    return d;
+  }
+
+  function wireLinks(root = document) {
+    root.querySelectorAll(".js-wa").forEach((a) => {
+      if (hasWa) { a.href = waUrl(a.dataset.msg || "Olá!"); a.target = "_blank"; a.rel = "noopener"; }
+      else { a.href = "#contatos"; a.removeAttribute("target"); }
+    });
+    root.querySelectorAll(".js-maps").forEach((a) => (a.href = CONFIG.MAPS));
+  }
+
+  document.querySelectorAll(".js-wa-label").forEach((el) => (el.textContent = hasWa ? formatPhone(digits(CONFIG.WHATSAPP)) : "Número a confirmar"));
+  document.querySelectorAll(".js-insta").forEach((a) => {
+    if (/^https:\/\//.test(CONFIG.INSTAGRAM)) {
+      a.href = CONFIG.INSTAGRAM; a.target = "_blank"; a.rel = "noopener";
+      const m = CONFIG.INSTAGRAM.match(/instagram\.com\/([^/?#]+)/);
+      a.querySelector(".js-insta-label").textContent = m ? "@" + m[1] : "Instagram";
+    }
+  });
+
+  const chips = document.getElementById("chips");
+  const grid = document.getElementById("products");
+  let current = "todos";
+  try { current = localStorage.getItem("sp-cat") || "todos"; } catch (e) {}
+  if (current !== "todos" && !CATEGORIES.some((c) => c.id === current)) current = "todos";
+
+  function renderChips() {
+    const all = [{ id: "todos", name: "Todos" }, ...CATEGORIES];
+    chips.innerHTML = all.map((c) => `<button type="button" class="chip" data-cat="${c.id}" aria-pressed="${c.id === current}">${c.name}</button>`).join("");
+  }
+  function renderProducts() {
+    const list = PRODUCTS.filter((p) => current === "todos" || p.cat === current);
+    grid.innerHTML = list.map((p) => {
+      const cat = CATEGORIES.find((c) => c.id === p.cat);
+      const price = typeof p.price === "number" ? brl.format(p.price) : "Consulte o preço";
+      const msg = `Olá! Tenho interesse em: ${p.name} (${cat.name}). Pode me passar preço e disponibilidade?`;
+      return `<article class="product">
+        <div class="img" aria-hidden="true">${p.tag ? `<span class="tag">${esc(p.tag)}</span>` : ""}<svg><use href="#${cat.icon}"/></svg></div>
+        <div class="body">
+          <span class="cat">${cat.name}</span>
+          <h3>${esc(p.name)}</h3>
+          <p>${esc(p.desc)}</p>
+          <span class="price">${price}</span>
+          <a class="btn btn-wa js-wa" data-msg="${esc(msg)}" href="#contatos"><svg width="18" height="18"><use href="#i-wa"/></svg>Pedir no WhatsApp</a>
+        </div>
+      </article>`;
+    }).join("");
+    wireLinks(grid);
+  }
+  chips.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-cat]");
+    if (!b) return;
+    current = b.dataset.cat;
+    try { localStorage.setItem("sp-cat", current); } catch (e2) {}
+    renderChips(); renderProducts();
+  });
+  renderChips(); renderProducts();
+
+  const VIEWS = ["inicio", "institucional", "produtos", "contatos"];
+  function show() {
+    const h = location.hash.replace("#", "");
+    const v = VIEWS.includes(h) ? h : "inicio";
+    document.querySelectorAll("[data-view]").forEach((s) => (s.hidden = s.dataset.view !== v));
+    document.querySelectorAll("[data-tab]").forEach((a) => a.setAttribute("aria-current", a.dataset.tab === v ? "page" : "false"));
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", show);
+  show();
+  wireLinks();
+
+  document.getElementById("copy-addr").addEventListener("click", (e) => {
+    const btn = e.currentTarget;
+    const node = document.getElementById("addr-text");
+    const done = () => { btn.textContent = "Copiado"; setTimeout(() => (btn.textContent = "Copiar endereço"), 1800); };
+    const selectText = () => {
+      const r = document.createRange(); r.selectNodeContents(node);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = "Selecionado: copie com Ctrl+C";
+    };
+    try { navigator.clipboard.writeText(node.textContent).then(done, selectText); } catch (err) { selectText(); }
+  });
+
+  document.getElementById("contact-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("c-name");
+    const msg = document.getElementById("c-msg");
+    const subject = document.getElementById("c-subject").value;
+    const res = document.getElementById("c-result");
+    let ok = true;
+    [[name, "c-name-err", "Informe seu nome."], [msg, "c-msg-err", "Escreva sua mensagem."]].forEach(([el, id, text]) => {
+      const err = document.getElementById(id);
+      const empty = !el.value.trim();
+      err.textContent = empty ? text : "";
+      err.hidden = !empty;
+      el.setAttribute("aria-invalid", empty ? "true" : "false");
+      if (empty) ok = false;
+    });
+    if (!ok) return;
+    const text = `Olá! Sou ${name.value.trim()}.\nAssunto: ${subject}\n\n${msg.value.trim()}`;
+    res.hidden = false;
+    if (hasWa) {
+      res.textContent = "Abrimos o WhatsApp com a sua mensagem. É só tocar em enviar.";
+      const a = document.createElement("a");
+      a.href = waUrl(text); a.target = "_blank"; a.rel = "noopener";
+      document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      res.textContent = "O número de WhatsApp ainda está sendo confirmado.";
+    }
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>

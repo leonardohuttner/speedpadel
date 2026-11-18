@@ -1,0 +1,79 @@
+:root {
+  --ink: #0B1D2C;
+  --paper: #F2F6FA;
+  --court: #155E9E;
+  --deep: #0E4677;
+  --ball: #D9F24A;
+  --sky: #1A6FB5;
+  --soft: #4A5F70;
+  --line: #D3DEE8;
+  --card: #FBFCFD;
+  --onblue: #D3E4F2;
+}
+body { font-family: 'Barlow', Arial, sans-serif; color: var(--ink); }
+section { padding: 128px; background: var(--paper); display: flex; flex-direction: column; gap: 40px; box-sizing: border-box; }
+section.dark { background: var(--deep); color: var(--paper); }
+section.ball { background: var(--ball); color: var(--ink); }
+section.photo { background: var(--deep); color: var(--paper); }
+
+h1, h2, h3 { font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif; text-transform: uppercase; margin: 0; }
+h1 { font-size: 150px; font-weight: 800; font-style: italic; line-height: 0.95; }
+h2 { font-size: 88px; font-weight: 800; font-style: italic; line-height: 1; }
+h3 { font-size: 44px; font-weight: 700; line-height: 1.05; }
+p { font-size: 32px; line-height: 1.4; margin: 0; }
+
+.eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--sky); }
+.dark .eyebrow, .photo .eyebrow { color: var(--ball); }
+.ball .eyebrow { color: var(--ink); }
+.lead { font-size: 40px; line-height: 1.35; color: var(--soft); width: 1300px; }
+.dark .lead, .photo .lead { color: var(--onblue); }
+.hl { color: var(--ball); }
+.muted { color: var(--soft); }
+.dark .muted { color: var(--onblue); }
+
+.bg-photo { position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; object-fit: cover; }
+.bg-shade { position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; background: linear-gradient(90deg, rgba(8, 36, 64, 0.94) 0%, rgba(8, 36, 64, 0.80) 45%, rgba(8, 36, 64, 0.15) 100%); }
+.logo { width: 132px; height: 132px; border-radius: 66px; border: 5px solid var(--ball); }
+
+.cols { display: grid; gap: 32px; }
+.cols-2 { grid-template-columns: 1fr 1fr; }
+.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+.card { background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 16px; }
+.card .txt { font-size: 28px; color: var(--soft); line-height: 1.4; }
+.card .tag { font-size: 24px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--sky); }
+.dark .card { background: #155485; border-color: #2470AD; }
+.dark .card .txt { color: var(--onblue); }
+.dark .card .tag { color: var(--ball); }
+
+.stat { border-top: 6px solid var(--court); padding-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+.stat .big { font-family: 'Barlow Condensed', Arial, sans-serif; font-size: 112px; font-weight: 800; font-style: italic; line-height: 1; color: var(--court); }
+.stat .lbl { font-size: 30px; color: var(--soft); line-height: 1.3; }
+
+.num { font-family: 'Barlow Condensed', Arial, sans-serif; font-size: 96px; font-weight: 800; color: var(--court); line-height: 1; }
+.dark .num { color: var(--ball); }
+.step { border-top: 6px solid var(--court); padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.dark .step { border-top-color: var(--ball); }
+.step .txt { font-size: 28px; color: var(--soft); line-height: 1.4; }
+.dark .step .txt { color: var(--onblue); }
+
+.split { display: grid; grid-template-columns: 1fr 760px; gap: 64px; align-items: center; flex: 1; }
+.shot { width: 760px; height: 470px; object-fit: cover; border-radius: 24px; }
+
+.badge { font-family: 'Barlow Condensed', Arial, sans-serif; font-size: 56px; font-weight: 800; font-style: italic; text-transform: uppercase; background: var(--ball); color: var(--ink); border-radius: 14px; padding: 8px 24px; line-height: 1; }
+
+.code { font-family: 'Courier New', monospace; font-size: 28px; background: var(--ink); color: var(--paper); border-radius: 16px; padding: 32px 40px; line-height: 1.5; display: flex; flex-direction: column; gap: 4px; }
+.code p { font-family: 'Courier New', monospace; font-size: 28px; }
+.code .k { color: var(--ball); }
+
+.spacer { flex: 1; }
+.foot { font-size: 24px; color: var(--soft); }
+.dark .foot, .photo .foot { color: var(--onblue); }
+
+.anim { animation: rise 600ms ease-out both; }
+.d1 { animation-delay: 120ms; }
+.d2 { animation-delay: 240ms; }
+.d3 { animation-delay: 360ms; }
+.d4 { animation-delay: 480ms; }
+@keyframes rise { from { opacity: 0; transform: translate(0px, 24px); } to { opacity: 1; transform: translate(0px, 0px); } }
