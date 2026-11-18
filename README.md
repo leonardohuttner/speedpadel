@@ -22,8 +22,8 @@ Qualquer hospedagem de site estático serve:
 
 ## Pendências (a confirmar com a dona)
 
-- Número do WhatsApp e perfil do Instagram
+- Número do WhatsApp: o link da bio (wa.me/5198809971) está sem o 55; no site usamos 555198809971
 - Endereço (Av. Sete de Setembro, 388 – Centro, achado em guia online) e horários
-- Logo e cores definitivas (hoje: logo provisório, azul quadra e amarelo bolinha)
-- Fotos da arena e da turma
+- Nome da organizadora (opcional)
+- Mais fotos (turma, produtos, fachada)
 - Produtos reais e preços
