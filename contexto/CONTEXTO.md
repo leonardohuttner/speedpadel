@@ -32,7 +32,8 @@ No manual, as imagens já estão no próprio artifact: foto `/_blob/248d5a6d9ff6
 - Público forte de **iniciantes**. Uma **responsável dedicada** organiza tudo: fecha grupos e duplas para "dar jogo". Comunidade ativa com **291 membros**.
 - **Para o primeiro jogo recomenda-se aula**: há **professores de padel parceiros**.
 - **Revenda/loja oficial Compass** na região.
-- Produtos: roupas, raquetes, bolinhas, grip, protetor (**sem mostrar estoque**), além das bebidas.
+- Produtos: roupas, raquetes, bolinhas, grip, protetor (**sem mostrar estoque**).
+- **Bebidas não entram na página Produtos**: são vendidas só na arena, sem pedido pelo WhatsApp. Aparecem apenas como diferencial (cartão "Bebidas geladas" no Início e na ficha da arena).
 - Agendamento de horários pelo WhatsApp (não há sistema de reserva online).
 - Sem blog.
 - Endereço encontrado em guia online (benditoguia.com.br): **Av. Sete de Setembro, 388 – Centro, Camaquã/RS, 96180-000**. **A confirmar.**
@@ -43,7 +44,7 @@ No manual, as imagens já estão no próprio artifact: foto `/_blob/248d5a6d9ff6
 - Abas por hash: `#inicio`, `#institucional`, `#produtos`, `#contatos`. Cabeçalho azul fixo com logo, botão flutuante de WhatsApp.
 - **Início:** hero "Nunca jogou? A gente monta o seu jogo." com foto da quadra e botões *Agendar horário* / *Quero uma aula*; faixa de números (2019 · 291 · 1 quadra coberta · Compass); 6 cartões (Aulas com professores, Grupos para iniciantes, Agendamento fácil, Loja oficial Compass, Centro com estacionamento, Bebidas geladas); 3 passos (WhatsApp → aula com professor parceiro → grupo); faixa CTA; FAQ; cartão de endereço com WhatsApp + Como chegar.
 - **Institucional:** história desde 2019, organizadora dos grupos, professores parceiros, Compass, o que é padel; foto; ficha da arena; pilares Comunidade / Performance / Diversão.
-- **Produtos:** faixa "Loja oficial Compass"; filtro por categoria (Raquetes, Bolinhas, Grips, Protetores, Roupas, Bebidas); cada produto com "Consulte o preço" e botão "Pedir no WhatsApp" com mensagem pronta.
+- **Produtos:** faixa "Loja oficial Compass"; produtos agrupados por categoria (Raquetes, Bolinhas, Grips, Protetores, Roupas), com filtro; cada produto com "Consulte o preço" e botão "Pedir no WhatsApp" com mensagem pronta.
 - **Contatos:** estilo Linktree (Agendar pelo WhatsApp, Agendar uma aula, Entrar num grupo, Instagram, Loja Compass, Como chegar, Conheça a Speed), copiar endereço e formulário que abre o WhatsApp com a mensagem.
 - Dados editáveis no fim do arquivo, no `<script>`: `CONFIG` (WHATSAPP, INSTAGRAM, MAPS), `CATEGORIES` e `PRODUCTS` (`price: null` = "Consulte o preço"; `tag` = selo opcional).
 - Fontes: Barlow Condensed (títulos) + Barlow (texto), do Google Fonts. Tema claro e escuro.
